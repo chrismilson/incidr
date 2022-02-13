@@ -55,6 +55,10 @@ class CidrBlock:
 
         return CidrBlock(base_ip, subnet_mask)
 
+    # The smallest cidr block that contains this cidr block non-trivially
+    def parent(self):
+        return CidrBlock(self.base_ip, (self.subnet_mask << 1) & 0xffffffff)
+
     def __eq__(self, other):
         return self.base_ip == other.base_ip and self.subnet_mask == other. subnet_mask
 
